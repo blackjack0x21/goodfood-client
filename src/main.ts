@@ -26,6 +26,18 @@ import './theme/variables.css';
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+
+if(process.env.NODE_ENV === "local-dev")
+{
+  app.config.globalProperties.$constapi = process.env.VUE_APP_LOCAL_API_URL;
+}
+
+if(process.env.NODE_ENV === "hosted-dev")
+{
+  app.config.globalProperties.$constapi = process.env.VUE_APP_HOSTED_API_URL;
+}
+
+console.log(app.config.globalProperties.$constapi);
   
 router.isReady().then(() => {
   app.mount('#app');
