@@ -25,6 +25,7 @@ Tous les fichiers de traduction sont situés dans /src/locales.
 
 Pour faciliter la création de traduction il est possible de lancer la commande suivante :
 > vue ui
+> 
 Cela va ouvrir une interface graphique avec toutes les informations concernant le projet.
 
 Il suffit ensuite de naviguer dans l'onglet **Localizations**
