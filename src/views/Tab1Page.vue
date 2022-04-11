@@ -2,26 +2,65 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>{{ $t('WINDOW') }} 1</ion-title>
+          <ion-fab-button class="button-left">
+            <ion-img src="https://hatscripts.github.io/circle-flags/flags/fr.svg"></ion-img>
+          </ion-fab-button>
+          <ion-fab-button class="button-right">
+            <ion-icon :icon="cartSharp"></ion-icon>
+          </ion-fab-button>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
+      <ion-searchbar></ion-searchbar>
         <ion-toolbar>
-          <ion-title size="large">Tab 1</ion-title>
+          <ion-segment>
+            <ion-segment-button>
+              Base tomate
+            </ion-segment-button>
+            <ion-segment-button>
+              Base crème
+            </ion-segment-button>
+            <ion-segment-button>
+              Boissons
+            </ion-segment-button>
+          </ion-segment>
         </ion-toolbar>
-      </ion-header>
-    
-      <ExploreContainer name="Tab 1 page" />
+
+        <ion-slides :options="slideOpts">
+          <ion-slide>
+            <PizzaItem/>
+          </ion-slide>
+          <ion-slide>
+            <PizzaItem/>
+          </ion-slide>
+          <ion-slide>
+            <PizzaItem/>
+          </ion-slide>
+        </ion-slides>
+        <ion-button shape="round" expand="block">Voir plus</ion-button>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonSearchbar, IonFabButton, IonIcon, IonSlide, IonSlides } from '@ionic/vue';
+import { cartSharp } from 'ionicons/icons';
+import PizzaItem from '@/components/PizzaItem.vue';
+import '../styles/index.css'
 
 export default  {
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+  components: { IonHeader, IonToolbar, IonContent, IonPage, IonSearchbar, PizzaItem, IonFabButton, IonIcon, IonSlide, IonSlides },
+  setup() {
+    const slideOpts = {
+      slidesPerView: 1.5,
+      speed: 400,
+      centeredSlides: true,
+    };
+
+    return {
+      cartSharp,
+      slideOpts
+    }
+  }
 }
 </script>
