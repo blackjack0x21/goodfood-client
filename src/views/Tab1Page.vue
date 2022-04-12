@@ -26,40 +26,48 @@
           </ion-segment>
         </ion-toolbar>
 
-        <ion-slides :options="slideOpts">
-          <ion-slide>
-            <PizzaItem/>
-          </ion-slide>
-          <ion-slide>
-            <PizzaItem/>
-          </ion-slide>
-          <ion-slide>
-            <PizzaItem/>
-          </ion-slide>
-        </ion-slides>
+        <swiper
+          :slides-per-view="1.5"
+          :centered-slides=true
+          :modules="modules"
+          :direction="horizontal"
+          :loop="true"
+        >
+          <swiper-slide>
+            <PizzaItem :pizzaImage="'https://laroma-pizza.fr/wp-content/uploads/2021/06/pizza-homepage.png'" :name="'Bacon'" :price="'12€'"/>
+          </swiper-slide>
+          <swiper-slide>
+            <PizzaItem :pizzaImage="'https://www.pngplay.com/wp-content/uploads/2/Top-View-Pizza-Transparent-Images.png'" :name="'Poivron'" :price="'14€'"/>
+          </swiper-slide>
+          <swiper-slide>
+            <PizzaItem :pizzaImage="'https://www.pngplay.com/wp-content/uploads/6/Real-Dominos-Pizza-Transparent-PNG.png'" :name="'Chorizo'" :price="'10€'"/>
+          </swiper-slide>
+          <swiper-slide>
+            <PizzaItem :pizzaImage="'https://www.pngplay.com/wp-content/uploads/2/Cheese-Pizza-Transparent-Background.png'" :name="'4 fromages'" :price="'12€'"/>
+          </swiper-slide>
+        </swiper>
         <ion-button shape="round" expand="block">Voir plus</ion-button>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonContent, IonSearchbar, IonFabButton, IonIcon, IonSlide, IonSlides } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonSearchbar, IonFabButton, IonIcon } from '@ionic/vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import { cartSharp } from 'ionicons/icons';
 import PizzaItem from '@/components/PizzaItem.vue';
 import '../styles/index.css'
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 export default  {
-  components: { IonHeader, IonToolbar, IonContent, IonPage, IonSearchbar, PizzaItem, IonFabButton, IonIcon, IonSlide, IonSlides },
+  components: { IonHeader, IonToolbar, IonContent, IonPage, IonSearchbar, PizzaItem, IonFabButton, IonIcon, Swiper, SwiperSlide },
   setup() {
-    const slideOpts = {
-      slidesPerView: 1.5,
-      speed: 400,
-      centeredSlides: true,
-    };
-
     return {
       cartSharp,
-      slideOpts
     }
   }
 }

@@ -1,3 +1,11 @@
 ion-card-header > ion-img {
     margin-bottom: 10%;
 }
+
+ion-card-header > ion-card-title {
+    text-align: center;
+}
+
+ion-card-content {
+    text-align: center;
+}

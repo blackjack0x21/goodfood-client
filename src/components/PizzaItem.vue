@@ -1,11 +1,12 @@
 <template>
     <ion-card>
     <ion-card-header>
-        <ion-img src="https://laroma-pizza.fr/wp-content/uploads/2021/06/pizza-homepage.png"></ion-img>
-        <ion-card-title>Reine</ion-card-title>
+        <!-- <ion-img src="https://laroma-pizza.fr/wp-content/uploads/2021/06/pizza-homepage.png"></ion-img> -->
+        <ion-img :src="pizzaImage"></ion-img>
+        <ion-card-title>{{name}}</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content>12€</ion-card-content>
+    <ion-card-content>{{price}}</ion-card-content>
   </ion-card>
 </template>
 
@@ -14,6 +15,11 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg } from '@i
 import '../styles/pizzaitem.css';
 
 export default {
+    props: {
+      pizzaImage: String,
+      name: String,
+      price: String  
+    },
     components: { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg }
 }
 </script>
