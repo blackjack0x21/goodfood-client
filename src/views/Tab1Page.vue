@@ -11,7 +11,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-searchbar></ion-searchbar>
+      <ion-searchbar :placeholder="$t('SEARCH')"></ion-searchbar>
         <ion-toolbar>
           <ion-segment>
             <ion-segment-button>
@@ -46,7 +46,7 @@
             <PizzaItem :pizzaImage="'https://www.pngplay.com/wp-content/uploads/2/Cheese-Pizza-Transparent-Background.png'" :name="'4 fromages'" :price="'12€'"/>
           </swiper-slide>
         </swiper>
-        <ion-button shape="round" expand="block">Voir plus</ion-button>
+        <ion-button shape="round" expand="block">{{ $t('SEARCH') }}</ion-button>
     </ion-content>
   </ion-page>
 </template>

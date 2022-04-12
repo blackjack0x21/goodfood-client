@@ -1,7 +1,6 @@
 <template>
     <ion-card>
     <ion-card-header>
-        <!-- <ion-img src="https://laroma-pizza.fr/wp-content/uploads/2021/06/pizza-homepage.png"></ion-img> -->
         <ion-img :src="pizzaImage"></ion-img>
         <ion-card-title>{{name}}</ion-card-title>
     </ion-card-header>
