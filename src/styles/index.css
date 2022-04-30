@@ -1,0 +1,11 @@
+.button-left {
+    float: left;
+    height: 40px;
+    width: 40px;
+}
+
+.button-right {
+    float: right;
+    height: 40px;
+    width: 40px;
+}
