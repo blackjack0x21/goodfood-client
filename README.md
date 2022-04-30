@@ -1,8 +1,13 @@
+# Préparation de l'environnement
+1. Installer [Node v16.14.2](https://nodejs.org/dist/v16.14.2/)
+3. Installer Vue avec 
+> npm install -g @vue/cli
+
 # Installation
 1. Si ce n'est pas déjà le cas installer [Git](https://git-scm.com/downloads)
 2. Cloner le repo
 3. Installer les dépendences npm avec
-> npm i
+> npm run i
 4. Une fois dans le repo, créer un fichier nommé .env à la racine du projet et récupérer les variables depuis le discord
 
 # Commandes
