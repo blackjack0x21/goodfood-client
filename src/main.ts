@@ -33,6 +33,8 @@ const app = createApp(App).use(i18n).use(i18n)
 if(process.env.NODE_ENV === "local-dev")
 {
   app.config.globalProperties.$constapi = process.env.VUE_APP_LOCAL_API_URL;
+  app.config.globalProperties.$supabase_url = process.env.VUE_APP_LOCAL_SUPABASE_URL;
+  app.config.globalProperties.$supabase_anon_key = process.env.VUE_APP_LOCAL_SUPABASE_ANON_KEY;
 }
 
 if(process.env.NODE_ENV === "hosted-dev")
