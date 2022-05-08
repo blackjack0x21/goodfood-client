@@ -1,21 +1,25 @@
 <template>
-    <form class="ion-padding" @submit.prevent="handleLogin">
+    <form class="ion-padding" @submit.prevent="registerHandler">
         <ion-list>
             <ion-item>
-                <ion-label position="floating">Nom</ion-label>
-                <ion-input type="text" required  v-model="nom"/>
+                <ion-label position="floating">Prenom</ion-label>
+                <ion-input type="text" required  v-model="firstName"/>
             </ion-item>
             <ion-item>
-                <ion-label position="floating">Prenom</ion-label>
-                <ion-input type="text" required  v-model="prenom"/>
+                <ion-label position="floating">Nom</ion-label>
+                <ion-input type="text" required  v-model="lastName"/>
             </ion-item>
             <ion-item>
                 <ion-label position="floating">Email</ion-label>
-                <ion-input type="email" required v-model="email"/>
+                <ion-input required type="email" v-model="email"/>
             </ion-item>
             <ion-item>
                 <ion-label position="floating">Mot de passe</ion-label>
-                <ion-input type="password" required v-model="mdp"/>
+                <ion-input type="password" required v-model="password"/>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Confirmation mot de passe</ion-label>
+                <ion-input type="password" required v-model="passwordConfimation"/>
             </ion-item>
         </ion-list>            
         <ion-label v-if="errorMessage != ''" position="floating" style="color:#C20000">{{errorMessage}}</ion-label>
@@ -28,39 +32,52 @@
 
 <script>
 import { IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList  } from "@ionic/vue";
-import { supabase } from "../../../supabase"
-import { ref } from "vue"
+import axios from 'axios';
 
 export default {
-    components: {
-        IonLabel,
-        IonItem,
-        IonNavLink,
-        IonButton,
-        IonInput,
-        IonList,
-    },
-    setup() {
-    const loading = ref(false)
-    const email = ref("")
+  components: {
+      IonLabel,
+      IonItem,
+      IonNavLink,
+      IonButton,
+      IonInput,
+      IonList,
+  },
 
-    const handleLogin = async () => {
+  methods: {
+    async registerHandler() {
       try {
-        loading.value = true
-        const { error } = await supabase.auth.signIn({ email: email.value })
-        if (error) throw error
-        alert("Check your email for the login link!")
-      } catch (error) {
-        alert(error.error_description || error.message)
-      } finally {
-        loading.value = false
+        // Send a POST request
+        await axios({
+          headers: {
+            "Content-Type" : "application/json",
+            "Access-Control-Allow-Origin": "*"
+          },
+          method: 'post',
+          url: 'http://localhost:3000/api/customer',
+          data: {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            password: this.passwordConfirmation,
+            passwordConfirmation: this.passwordConfirmation,
+            email: this.email
+          }
+        });
+      }
+      catch(e) {
+        console.log(e);
       }
     }
+  },
 
+  data() {
     return {
-      loading,
-      email,
-      handleLogin,
+      loading: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+      passwordConfirmation: "",
+      email: "",
     }
   },
 }
