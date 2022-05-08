@@ -28,7 +28,9 @@
     "swiper": "^8.1.0",
     "vue": "^3.2.21",
     "vue-i18n": "^9.1.0",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue-simple-password-meter": "^1.1.0",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@capacitor/cli": "3.4.0",
