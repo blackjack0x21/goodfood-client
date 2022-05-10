@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList  } from "@ionic/vue";
+import { IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList, loadingController  } from "@ionic/vue";
 import axios from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
 import zxcvbn from 'zxcvbn';
@@ -52,7 +52,14 @@ export default {
   methods: {
     async registerHandler() {
       if(this.formValid() === true) {
+        
+        const loading = await loadingController
+        .create({
+          message: 'Creating account',
+        });
+        
         try {
+          await loading.present();
           // Send a POST request
           await axios({
             headers: {
@@ -73,28 +80,30 @@ export default {
         catch(e) {
           console.log(e);
         }
+        finally {
+          loading.dismiss();
+        }
       }
     },
 
     formValid() {
-        let isValid = true;
-        if(this.password !== this.passwordConfirmation) {
-          console.log("passwords do not match");
-          isValid = false;
-        }
-
-        let passwordStrength = zxcvbn(this.password).score;
-        if(passwordStrength < 2) {
-          console.log("password too weak : score is : " + passwordStrength);
-          isValid = false
-        }
-        return isValid;
+      let isValid = true;
+      if(this.password !== this.passwordConfirmation) {
+        console.log("passwords do not match");
+        isValid = false;
       }
+
+      let passwordStrength = zxcvbn(this.password).score;
+      if(passwordStrength < 2) {
+        console.log("password too weak : score is : " + passwordStrength);
+        isValid = false
+      }
+      return isValid;
+    },
   },
 
   data() {
     return {
-      loading: "",
       firstName: "",
       lastName: "",
       password: "",
