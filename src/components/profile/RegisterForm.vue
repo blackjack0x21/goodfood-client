@@ -33,10 +33,12 @@
 </template>
 
 <script>
-import { IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList, loadingController  } from "@ionic/vue";
+import { IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList, loadingController, toastController } from "@ionic/vue";
+import { informationCircle } from 'ionicons/icons';
 import axios from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
 import zxcvbn from 'zxcvbn';
+import '../../styles/toast.css';
 
 export default {
   components: {
@@ -57,7 +59,7 @@ export default {
         .create({
           message: 'Creating account',
         });
-        
+
         try {
           await loading.present();
           // Send a POST request
@@ -82,6 +84,7 @@ export default {
         }
         finally {
           loading.dismiss();
+          this.openToast();
         }
       }
     },
@@ -100,6 +103,19 @@ export default {
       }
       return isValid;
     },
+
+    async openToast() {
+      const toast = await toastController
+        .create({
+          message: 'Your settings have been saved.',
+          duration: 2000,
+          color: "danger",
+          position: "bottom",
+          cssClass: 'toast'
+        })
+        toast.color = "success";
+      return toast.present();
+    }
   },
 
   data() {
