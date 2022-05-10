@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import { IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList, loadingController, toastController } from "@ionic/vue";
+import { IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList } from "@ionic/vue";
 import axios from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
 import zxcvbn from 'zxcvbn';
-import '../../styles/toast.css';
 import notification, { TypeNotification } from '../../../utils/notification'
+import { startLoading, stopLoading } from '../../../utils/loader';
 
 export default {
   components: {
@@ -54,14 +54,8 @@ export default {
   methods: {
     async registerHandler() {
       if(this.formValid() === true) {
-        
-        const loading = await loadingController
-        .create({
-          message: 'Creating account',
-        });
-
         try {
-          await loading.present();
+          startLoading("Création du compte");
           // Send a POST request
           await axios({
             headers: {
@@ -78,13 +72,14 @@ export default {
               email: this.email
             }
           });
+          notification("Compte créé, vérifiez votre adresse email", TypeNotification.Success);
         }
         catch(e) {
           console.log(e);
+          notification("Une erreur est survenue", TypeNotification.Danger);
         }
         finally {
-          loading.dismiss();
-          notification("Test Message", TypeNotification.Danger);
+          stopLoading();
         }
       }
     },
