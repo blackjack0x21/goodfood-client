@@ -34,11 +34,11 @@
 
 <script>
 import { IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList, loadingController, toastController } from "@ionic/vue";
-import { informationCircle } from 'ionicons/icons';
 import axios from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
 import zxcvbn from 'zxcvbn';
 import '../../styles/toast.css';
+import notification, { TypeNotification } from '../../../utils/notification'
 
 export default {
   components: {
@@ -84,7 +84,7 @@ export default {
         }
         finally {
           loading.dismiss();
-          this.openToast();
+          notification("Test Message", TypeNotification.Danger);
         }
       }
     },
@@ -103,19 +103,6 @@ export default {
       }
       return isValid;
     },
-
-    async openToast() {
-      const toast = await toastController
-        .create({
-          message: 'Your settings have been saved.',
-          duration: 2000,
-          color: "danger",
-          position: "bottom",
-          cssClass: 'toast'
-        })
-        toast.color = "success";
-      return toast.present();
-    }
   },
 
   data() {
