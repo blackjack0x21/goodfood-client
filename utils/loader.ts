@@ -1,6 +1,6 @@
 import { loadingController } from "@ionic/vue";
 
-let loader: HTMLIonLoadingElement = null;
+let loader: HTMLIonLoadingElement;
 
 export async function startLoading(message: string) {
     loader = await loadingController
