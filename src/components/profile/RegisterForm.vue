@@ -32,9 +32,9 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList } from "@ionic/vue";
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
 import zxcvbn from 'zxcvbn';
 import notification, { TypeNotification } from '../../../utils/notification'
@@ -75,8 +75,18 @@ export default {
           notification("Compte créé, vérifiez votre adresse email", TypeNotification.Success);
         }
         catch(e) {
+          const reason = e as AxiosError;
+          const responseCode = reason.response?.status;
           console.log(e);
-          notification("Une erreur est survenue", TypeNotification.Danger);
+          let message = "";
+          if(responseCode === 409) {
+            message = "Account already registered";
+          }
+
+          if(message === "") {
+            message = "An Error has occured";
+          }
+          notification(message, TypeNotification.Danger);
         }
         finally {
           stopLoading();
@@ -87,13 +97,13 @@ export default {
     formValid() {
       let isValid = true;
       if(this.password !== this.passwordConfirmation) {
-        console.log("passwords do not match");
+        notification("Passwords do not match", TypeNotification.Danger);
         isValid = false;
       }
 
       let passwordStrength = zxcvbn(this.password).score;
       if(passwordStrength < 2) {
-        console.log("password too weak : score is : " + passwordStrength);
+        notification("Password too weak", TypeNotification.Danger);
         isValid = false
       }
       return isValid;
