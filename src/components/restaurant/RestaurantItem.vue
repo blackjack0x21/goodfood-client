@@ -1,5 +1,5 @@
 <template>
-    <ion-card>
+    <ion-card class="restaurant-card">
         <ion-card-header>
             <ion-card-title>{{nomRestaurant}}</ion-card-title>
          </ion-card-header> 
