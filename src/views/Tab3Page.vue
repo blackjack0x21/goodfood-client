@@ -11,7 +11,7 @@
           </ion-fab-button>
       </template>
       <profile-form v-if="store.user" />
-      <register-form v-else />
+      <login-form v-else />
   </base-layout>
 </template>
 
@@ -20,11 +20,11 @@ import { IonIcon, IonImg } from '@ionic/vue';
 import { cartSharp } from 'ionicons/icons';
 import { store } from "./store"
 import { supabase } from "../../supabase"
-import RegisterForm from "../components/profile/RegisterForm.vue"
+import LoginForm from "../components/profile/LoginForm.vue"
 import ProfileForm from "../components/profile/ProfileForm.vue"
 import '../styles/index.css'
 export default  {
-  components: { IonIcon, IonImg, RegisterForm, ProfileForm },
+  components: { IonIcon, IonImg, ProfileForm, LoginForm },
   setup() {
     store.user = supabase.auth.user()
     supabase.auth.onAuthStateChange((_, session) => {
@@ -34,6 +34,11 @@ export default  {
     return {
       cartSharp,
       store,
+    }
+  },
+
+  data() {
+    return {
     }
   },
 }

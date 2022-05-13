@@ -1,5 +1,5 @@
 <template>
-    <form class="ion-padding" @submit.prevent="submitForm">
+    <form class="ion-padding" @submit.prevent="loginHandler">
         <ion-list>
             <ion-item>
                 <ion-label position="floating">Email</ion-label>
@@ -7,11 +7,10 @@
             </ion-item>
             <ion-item>
                 <ion-label position="floating">Mot de passe</ion-label>
-                <ion-input type="password" required v-model="mdp"/>
+                <ion-input type="password" required v-model="password"/>
             </ion-item>
         </ion-list>
-        <ion-button @click="testfunction()" shape="round" type="submit" expand="block">Connexion</ion-button>
-        <ion-label v-if="errorMessage != ''" position="floating" style="color:#C20000">{{errorMessage}}</ion-label>
+        <ion-button shape="round" type="submit" expand="block">Connexion</ion-button>
         <ion-item>
             <ion-checkbox slot="start">
             </ion-checkbox>
@@ -27,9 +26,12 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { IonCheckbox, IonLabel, IonItem, IonNavLink, IonButton, IonInput, IonList } from "@ionic/vue";
-import axios from 'axios';
+import { supabase } from '../../../supabase';
+import notification, { TypeNotification } from '../../../utils/notification';
+import { startLoading, stopLoading } from '../../../utils/loader';
+import { ApiError } from '@supabase/gotrue-js';
 
 export default {
     components: {
@@ -41,26 +43,39 @@ export default {
         IonInput,
         IonList
     },
+
+    methods : {
+        async loginHandler() {
+            const email = this.email;
+            const password = this.password;
+            if(email && password) {
+                try {
+                    console.log("loginHandler");
+                    startLoading("Loading");
+                    const { user, session, error } = await supabase.auth.signIn({
+                        email: email,
+                        password: password,
+                    },
+                    {
+                        shouldCreateUser: false
+                    })
+                    if (error) throw error
+                    notification("Connected", TypeNotification.Success);
+                } catch (error: ApiError | any) {
+                    notification(error.error_description || error.message, TypeNotification.Danger);
+                } 
+                finally {
+                    stopLoading();
+                }
+            }
+        },
+    },
+
     data () {
         return{
-            email:'',            
-            mdp:'',
-            errorMessage:''
+            email:'',   
+            password: ''         
         }
     },
-    methods: {
-        testfunction() {
-            try {
-                loading.value = true
-                const { error } = await supabase.auth.signIn({ email: email.value })
-                if (error) throw error
-                alert("Check your email for the login link!")
-            } catch (error) {
-                alert(error.error_description || error.message)
-            } finally {
-                loading.value = false
-            }
-        }
-    }
 }
 </script>
