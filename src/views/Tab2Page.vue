@@ -30,7 +30,6 @@ import { cartSharp } from 'ionicons/icons';
 import RestaurantItem from '@/components/restaurant/RestaurantItem.vue';
 import '../styles/index.css'
 
-
 export default  {
   components: { IonList, IonSearchbar, RestaurantItem, IonFabButton, IonIcon },
 

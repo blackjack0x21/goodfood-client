@@ -50,8 +50,7 @@ export default {
             const password = this.password;
             if(email && password) {
                 try {
-                    console.log("loginHandler");
-                    startLoading("Loading");
+                    await startLoading("Loading");
                     const { user, session, error } = await supabase.auth.signIn({
                         email: email,
                         password: password,
@@ -61,7 +60,8 @@ export default {
                     })
                     if (error) throw error
                     notification("Connected", TypeNotification.Success);
-                } catch (error: ApiError | any) {
+                } 
+                catch (error: ApiError | any) {
                     notification(error.error_description || error.message, TypeNotification.Danger);
                 } 
                 finally {
