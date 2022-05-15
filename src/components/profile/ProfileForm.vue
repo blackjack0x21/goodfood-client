@@ -18,22 +18,18 @@ export default {
 
     methods: {
         async disconnectHandler() {
-            const email = "this.email";
-            const password = "this.password";
-            if(email && password) {
-                try {
-                    await startLoading("Loading");
-                    const { error } = await supabase.auth.signOut()
-                    if (error) throw error
-                    notification("Disconnected", TypeNotification.Success);
-                } 
-                catch(error) {
-                    console.log(error);
-                    notification("An error occured", TypeNotification.Danger);
-                } 
-                finally {
-                    stopLoading();
-                }
+            try {
+                await startLoading("Loading");
+                const { error } = await supabase.auth.signOut()
+                if (error) throw error
+                notification("Disconnected", TypeNotification.Success);
+            } 
+            catch(error) {
+                console.log(error);
+                notification("An error occured", TypeNotification.Danger);
+            } 
+            finally {
+                stopLoading();
             }
         }
     }
