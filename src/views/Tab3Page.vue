@@ -28,9 +28,14 @@ export default  {
   setup() {
     store.user = supabase.auth.user()
     supabase.auth.onAuthStateChange((_, session) => {
-      store.user = session.user
+      if(session !== null) {
+        store.user = session.user
+      }
+      else {
+        store.user = null
+      }
     })
-
+    
     return {
       cartSharp,
       store,
