@@ -1,19 +1,7 @@
 <template>
-  <base-layout pageTitle="Register" page-default-back-link="/tabs/tab3">
+  <base-layout pageTitle="Reset" page-default-back-link="/tabs/tab3">
     <form class="ion-padding" @submit.prevent="registerHandler">
       <ion-list>
-        <ion-item>
-            <ion-label position="floating">Prenom</ion-label>
-            <ion-input type="text" required  v-model="firstName"/>
-        </ion-item>
-        <ion-item>
-            <ion-label position="floating">Nom</ion-label>
-            <ion-input type="text" required  v-model="lastName"/>
-        </ion-item>
-        <ion-item>
-            <ion-label position="floating">Email</ion-label>
-            <ion-input required type="email" v-model="email"/>
-        </ion-item>
         <ion-item>
             <ion-label position="floating">Mot de passe</ion-label>
             <ion-input type="password" required v-model="password"/>
@@ -25,18 +13,18 @@
             <password-meter :password="passwordConfirmation" />
         </ion-item>
       </ion-list>            
-      <ion-button shape="round" type="submit" expand="block">S'inscrire</ion-button>
+      <ion-button shape="round" type="submit" expand="block">Réinitialiser mdp</ion-button>
     </form>
   </base-layout>
 </template>
 
 <script lang="ts">
 import { IonLabel, IonItem, IonButton, IonInput, IonList } from "@ionic/vue";
-import axios, { AxiosError } from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
 import zxcvbn from 'zxcvbn';
 import notification, { TypeNotification } from '../../utils/notification';
 import { startLoading, stopLoading } from '../../utils/loader';
+import { supabase } from '../../supabase'
 
 export default {
   components: {
@@ -53,37 +41,20 @@ export default {
       if(this.formValid() === true) {
         try {
           startLoading("Création du compte");
-          // Send a POST request
-          await axios({
-            headers: {
-              "Content-Type" : "application/json",
-              "Access-Control-Allow-Origin": "*"
-            },
-            method: 'post',
-            url: 'http://localhost:3000/api/customer',
-            data: {
-              firstName: this.firstName,
-              lastName: this.lastName,
-              password: this.passwordConfirmation,
-              passwordConfirmation: this.passwordConfirmation,
-              email: this.email
-            }
-          });
-          notification("Compte créé, vérifiez votre adresse email", TypeNotification.Success);
+          const accessToken: string | undefined = supabase.auth.session()?.access_token
+          if(accessToken) {
+            const { error, data } = await supabase.auth.api
+            .updateUser(accessToken, { password : this.password })
+            if (error) throw error
+            notification("Mot de passe réinitialisé", TypeNotification.Success);
+          }
+          else {
+            notification("You need to be logged in", TypeNotification.Danger);
+          }
         }
-        catch(e) {
-          const reason = e as AxiosError;
-          const responseCode = reason.response?.status;
-          console.log(e);
-          let message = "";
-          if(responseCode === 409) {
-            message = "Account already registered";
-          }
-
-          if(message === "") {
-            message = "An Error has occured";
-          }
-          notification(message, TypeNotification.Danger);
+        catch(error) {
+          console.log(error);
+          notification("An error occured", TypeNotification.Danger);
         }
         finally {
           stopLoading();
@@ -108,11 +79,8 @@ export default {
 
   data() {
     return {
-      firstName: '',
-      lastName: '',
       password: '',
       passwordConfirmation: '',
-      email: '',
     }
   },
 }

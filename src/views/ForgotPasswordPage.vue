@@ -31,7 +31,9 @@ export default {
     methods: {
         async resetPasswordHandler() {
             await startLoading("Loading");
-            await supabase.auth.api.resetPasswordForEmail(this.email)
+            await supabase.auth.api.resetPasswordForEmail(this.email, {
+                redirectTo: 'http://localhost:8080/tabs/tab3'
+            })
             notification("Demande effectuée, verifiez votre adresse email", TypeNotification.Success);
             stopLoading();
         }
