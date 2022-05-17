@@ -31,8 +31,12 @@ export default {
     methods: {
         async resetPasswordHandler() {
             await startLoading("Loading");
+            const resetUrl = `${process.env.VUE_APP_LOCAL_URL}/reset`;
+            console.log("resetUrl");
+            console.log(resetUrl);
             await supabase.auth.api.resetPasswordForEmail(this.email, {
-                redirectTo: 'http://localhost:8080/tabs/tab3'
+                // redirectTo: 'http://localhost:8080/reset'
+                redirectTo: resetUrl
             })
             notification("Demande effectuée, verifiez votre adresse email", TypeNotification.Success);
             stopLoading();
