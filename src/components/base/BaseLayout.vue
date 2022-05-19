@@ -7,7 +7,7 @@
                     <slot name="actions-start"></slot>
                 </ion-buttons>
                 <ion-title>{{ pageTitle }}</ion-title>
-                <ion-buttons slot="end">
+                <ion-buttons slot="end" router-link="/basket/">
                     <slot name="actions-end"></slot>
                 </ion-buttons>
             </ion-toolbar>

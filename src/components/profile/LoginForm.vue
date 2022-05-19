@@ -24,6 +24,8 @@
     <div class="ion-text-center">
         <ion-nav-link router-link="/forgot/">Mot de passe oublié?</ion-nav-link>
     </div>
+
+    <footer class="ion-text-center"> <ion-nav-link router-link="/legalmention/">Mentions légales</ion-nav-link> </footer>
 </template>
 
 <script lang="ts">
@@ -32,6 +34,7 @@ import { supabase } from '../../../supabase';
 import notification, { TypeNotification } from '../../../utils/notification';
 import { startLoading, stopLoading } from '../../../utils/loader';
 import { ApiError } from '@supabase/gotrue-js';
+import '../../styles/LoginForm.css';
 
 export default {
     components: {
