@@ -12,7 +12,10 @@
         </ion-list>
         <ion-button shape="round" type="submit" expand="block">Connexion</ion-button>
         <ion-item>
-            <ion-checkbox slot="start">
+            <ion-checkbox 
+                slot="start" 
+                @update:modelValue="stayLogged = $event"
+                :modelValue="stayLogged">
             </ion-checkbox>
             <ion-label>Rester connecté</ion-label>
         </ion-item>
@@ -48,6 +51,7 @@ export default {
         async loginHandler() {
             const email = this.email;
             const password = this.password;
+            const stayLogged = this.stayLogged
             if(email && password) {
                 try {
                     await startLoading("Loading");
@@ -59,6 +63,12 @@ export default {
                         shouldCreateUser: false
                     })
                     if (error) throw error
+                    if(stayLogged) {
+                        localStorage.setItem('stayLogged', 'true');
+                    }
+                    else {
+                        localStorage.setItem('stayLogged', 'false');
+                    }
                     notification("Connected", TypeNotification.Success);
                 } 
                 catch (error: ApiError | any) {
@@ -74,7 +84,8 @@ export default {
     data () {
         return{
             email:'',   
-            password: ''         
+            password: '',
+            stayLogged: false
         }
     },
 }
