@@ -25,18 +25,22 @@
             <password-meter :password="passwordConfirmation" />
         </ion-item>
       </ion-list>            
-      <ion-button shape="round" type="submit" expand="block">S'inscrire</ion-button>
+      <div class="ion-text-center" id="rgpd">
+        <ion-nav-link router-link="/rgpd/">Consulter et accepter la RGPD</ion-nav-link>
+      </div>
+      <ion-button id="pbregister" shape="round" type="submit" expand="block">S'inscrire</ion-button>
     </form>
   </base-layout>
 </template>
 
 <script lang="ts">
-import { IonLabel, IonItem, IonButton, IonInput, IonList } from "@ionic/vue";
+import { IonLabel, IonItem, IonButton, IonInput, IonList, IonNavLink } from "@ionic/vue";
 import axios, { AxiosError } from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
 import zxcvbn from 'zxcvbn';
 import notification, { TypeNotification } from '../../utils/notification';
 import { startLoading, stopLoading } from '../../utils/loader';
+import '../styles/registerpage.css'
 
 export default {
   components: {
@@ -45,7 +49,8 @@ export default {
       IonButton,
       IonInput,
       IonList,
-      PasswordMeter
+      PasswordMeter,
+      IonNavLink
   },
 
   methods: {
