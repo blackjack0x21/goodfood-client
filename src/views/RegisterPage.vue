@@ -53,7 +53,7 @@ export default {
     async registerHandler() {
       if(this.formValid() === true) {
         try {
-          startLoading("Création du compte");
+          await startLoading("Création du compte");
           // Send a POST request
           await axios({
             headers: {
@@ -87,7 +87,7 @@ export default {
           notification(message, TypeNotification.Danger);
         }
         finally {
-          stopLoading();
+          await stopLoading();
         }
       }
     },
