@@ -30,6 +30,7 @@
     "vue-i18n": "^9.1.0",
     "vue-router": "^4.0.12",
     "vue-simple-password-meter": "^1.1.0",
+    "vue3-google-map": "^0.11.0",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

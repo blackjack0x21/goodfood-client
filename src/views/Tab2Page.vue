@@ -11,8 +11,18 @@
           </ion-fab-button>
       </template>
       <ion-searchbar :placeholder="$t('SEARCH')"></ion-searchbar>
-      <ion-img src="https://www.journaldugeek.com/content/uploads/2017/02/google-maps.jpg"></ion-img>
-      
+      <GoogleMap
+      id="myMap"
+      api-key="AIzaSyDXApi9VzFbHBnvrwxliROLsfqcjkThuuY"
+      :zoom="15"
+      :streetViewControl=false
+      :zoomControl=false
+      :mapTypeControl=false
+      :center="mylocation"
+      >
+        <Marker :options="{ position: mylocation }" />
+      </GoogleMap>
+    
       <ion-list>
         <ion-item>
                 <RestaurantItem :nomRestaurant="'Goodfood Paris'" :adresseRestaurant="'2 All. Adrienne Lecouvreur'" :check="'true'"/>
@@ -25,18 +35,29 @@
 </template>
 
 <script lang="ts">
+import '../styles/index.css'
+import '../styles/restaurant.css'
+
 import { IonList, IonSearchbar, IonFabButton, IonIcon } from '@ionic/vue';
 import { cartSharp } from 'ionicons/icons';
-import RestaurantItem from '@/components/restaurant/RestaurantItem.vue';
-import '../styles/index.css'
+import { GoogleMap, Marker } from 'vue3-google-map';
 
+import RestaurantItem from '@/components/restaurant/RestaurantItem.vue';
+import { getCurrentPosition } from '../../utils/restaurant';
 
 export default  {
-  components: { IonList, IonSearchbar, RestaurantItem, IonFabButton, IonIcon },
-
+  components: { IonList, IonSearchbar, RestaurantItem, IonFabButton, IonIcon, GoogleMap, Marker },
+  
   setup() {
+
+    getCurrentPosition().then(function(position:any) {
+      let latitude = position.latitude
+      let longitude = position.longitude
+      let mylocation = { lat: latitude, lng: longitude }
+    });
+
     return {
-      cartSharp,
+      cartSharp
     }
   },
 }
