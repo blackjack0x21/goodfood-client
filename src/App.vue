@@ -22,7 +22,7 @@ export default defineComponent({
     // This method is called when the page is closing
     window.addEventListener('beforeunload', (event) => {
         const stayLogged = localStorage.getItem('stayLogged');
-        if(stayLogged === 'false') {
+        if(stayLogged === 'false' || !stayLogged) {
           // Log out the user and then clear the local storage
           this.signOut();
           localStorage.clear();
