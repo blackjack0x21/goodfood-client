@@ -27,8 +27,8 @@
       </ion-list>
       <div class="ion-text-center" id="rgpd">
         <ion-nav-link router-link="/rgpd/">Consulter et accepter la RGPD</ion-nav-link>
-        <ion-icon :icon="checkmarkCircleSharp" color="success" v-if="acceptedRgpd"></ion-icon>
-        <ion-icon :icon="closeCircleSharp" color="danger" v-else></ion-icon>
+        <ion-icon :icon="checkmarkCircleSharp" color="success" class="rgpd-icon" v-if="rgpdStore.getRgpdState"></ion-icon>
+        <ion-icon :icon="closeCircleSharp" color="danger" class="rgpd-icon" v-else></ion-icon>
       </div>
       <ion-button id="pbregister" shape="round" type="submit" expand="block">S'inscrire</ion-button>
     </form>
@@ -59,9 +59,12 @@ export default {
   },
 
   setup() {
+    let rgpdStore = useRgpdStore();
+
     return {
       checkmarkCircleSharp,
-      closeCircleSharp
+      closeCircleSharp,
+      rgpdStore
     }
   },
 
@@ -109,8 +112,7 @@ export default {
     },
 
     formValid() {
-      const rgpd = useRgpdStore();
-      const accepted = rgpd.getRgpdState;
+      const accepted = this.rgpdStore.getRgpdState;
 
       if(accepted === false) {
         notification("Vous devez accepter la RGPD", TypeNotification.Danger);
@@ -138,7 +140,6 @@ export default {
       password: '',
       passwordConfirmation: '',
       email: '',
-      acceptedRgpd: useRgpdStore().getRgpdState
     }
   },
 }

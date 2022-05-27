@@ -20,7 +20,15 @@
     width: 100%;
     text-align:center;
 }
+
 ion-nav-link {
     margin-left: auto;
     margin-right: auto;
+}
+
+.rgpd-icon {
+    font-size: 150%;
+    position: inherit;
+    right: 20%;
+    top: 89%;
 }
