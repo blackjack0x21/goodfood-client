@@ -153,16 +153,27 @@
           Informations personnelles : « les informations qui permettent, sous quelque forme que ce soit, directement ou non, 
           l’identification des personnes physiques auxquelles elles s’appliquent » (article 4 de la loi n° 78-17 du 6 janvier 1978).
       </p>
-
+    <ion-button id="pbregister" shape="round" type="submit" expand="block" @click="acceptRgpdHandler" router-link="/register/" router-direction="back">J'accepte</ion-button>
   </base-layout>
 </template>
 
 <script lang="ts">
 import '../styles/rgpdpage.css'
+import { IonButton} from "@ionic/vue";
+import { useRgpdStore } from '@/stores/rgpd'
 
-    export default {
-        
+export default {
+    components: {
+        IonButton
+    },
+
+    methods: {
+        acceptRgpdHandler() {
+            const rgpd = useRgpdStore();
+            rgpd.accept();
+        }
     }
+}
 </script>
 
 <style>
