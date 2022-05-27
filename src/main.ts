@@ -45,9 +45,6 @@ if(process.env.NODE_ENV === "hosted-dev")
 
 const pinia = createPinia()
 
-console.log(process.env.NODE_ENV);
-console.log(app.config.globalProperties.$constapi);
-
 app.component('base-layout', BaseLayout);
 app.use(pinia);
 
