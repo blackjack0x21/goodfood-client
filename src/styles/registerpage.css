@@ -32,3 +32,12 @@ ion-nav-link {
     right: 20%;
     top: 89%;
 }
+
+/* obligé de mettre la classe car ça marchait pas avec l'id 🤷 */
+.close-circle {
+    --animate-duration: 1.3s;
+}
+
+.checkmark-circle {
+    --animate-duration: 1.7s;
+}

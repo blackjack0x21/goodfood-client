@@ -27,8 +27,8 @@
       </ion-list>
       <div class="ion-text-center" id="rgpd">
         <ion-nav-link router-link="/rgpd/">Consulter et accepter la RGPD</ion-nav-link>
-        <ion-icon :icon="checkmarkCircleSharp" color="success" class="rgpd-icon" v-if="rgpdStore.getRgpdState"></ion-icon>
-        <ion-icon :icon="closeCircleSharp" color="danger" class="rgpd-icon" v-else></ion-icon>
+        <ion-icon :icon="checkmarkCircleSharp" color="success" class="rgpd-icon animate__animated animate__flipInY checkmark-circle" v-if="rgpdStore.getRgpdState"></ion-icon>
+        <ion-icon :icon="closeCircleSharp" color="danger" class="rgpd-icon animate__animated animate__rotateIn close-circle" v-else></ion-icon>
       </div>
       <ion-button id="pbregister" shape="round" type="submit" expand="block">S'inscrire</ion-button>
     </form>
@@ -45,6 +45,7 @@ import { startLoading, stopLoading } from '../../utils/loader';
 import '../styles/registerpage.css'
 import { useRgpdStore } from '@/stores/rgpd'
 import { checkmarkCircleSharp, closeCircleSharp } from 'ionicons/icons';
+import 'animate.css';
 
 export default {
   components: {
