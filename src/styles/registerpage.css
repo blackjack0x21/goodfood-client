@@ -1,0 +1,43 @@
+#rgpd {
+
+    position:absolute;
+
+    top: 50%;
+    
+    width:100%;
+    
+    padding-top:50px;
+    padding-right: 10%;
+    height:50px;
+    
+    }
+
+#pbregister {
+
+    position:center;
+    
+    top: 80%;
+    width: 100%;
+    text-align:center;
+}
+
+ion-nav-link {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rgpd-icon {
+    font-size: 150%;
+    position: inherit;
+    right: 20%;
+    top: 89%;
+}
+
+/* obligé de mettre la classe car ça marchait pas avec l'id 🤷 */
+.close-circle {
+    --animate-duration: 1.3s;
+}
+
+.checkmark-circle {
+    --animate-duration: 1.7s;
+}

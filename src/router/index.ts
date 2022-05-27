@@ -4,6 +4,7 @@ import TabsPage from '../views/TabsPage.vue'
 import RegisterPage from '../views/RegisterPage.vue'
 import ForgotPasswordPage from '../views/ForgotPasswordPage.vue'
 import ResetPasswordPage from '../views/ResetPasswordPage.vue'
+import RgpdPage from '../views/RgpdPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -43,6 +44,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/reset/',
     component: ResetPasswordPage
+  },
+  {
+    path: '/rgpd/',
+    component: RgpdPage
   }
 ]
 
