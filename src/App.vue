@@ -38,6 +38,7 @@ export default defineComponent({
           await startLoading("Loading");
           const { error } = await supabase.auth.signOut()
           if (error) throw error
+          localStorage.clear();
           notification("Disconnected", TypeNotification.Success);
         } 
         catch(error) {
