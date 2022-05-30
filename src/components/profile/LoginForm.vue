@@ -75,7 +75,7 @@ export default {
                     notification(error.error_description || error.message, TypeNotification.Danger);
                 } 
                 finally {
-                    stopLoading();
+                    await stopLoading();
                 }
             }
         },
