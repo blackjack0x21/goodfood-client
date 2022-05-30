@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import BaseLayout from './components/base/BaseLayout.vue';
 import router from './router';
+import { createPinia } from 'pinia';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -42,10 +43,10 @@ if(process.env.NODE_ENV === "hosted-dev")
   app.config.globalProperties.$constapi = process.env.VUE_APP_HOSTED_API_URL;
 }
 
-console.log(process.env.NODE_ENV);
-console.log(app.config.globalProperties.$constapi);
+const pinia = createPinia()
 
 app.component('base-layout', BaseLayout);
+app.use(pinia);
 
 router.isReady().then(() => {
   app.mount('#app');

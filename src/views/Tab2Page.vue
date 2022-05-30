@@ -41,7 +41,6 @@ import '../styles/restaurant.css'
 import { IonList, IonSearchbar, IonFabButton, IonIcon } from '@ionic/vue';
 import { cartSharp } from 'ionicons/icons';
 import { GoogleMap, Marker } from 'vue3-google-map';
-
 import RestaurantItem from '@/components/restaurant/RestaurantItem.vue';
 import { getCurrentPosition } from '../../utils/restaurant';
 import notification, { TypeNotification } from '../../utils/notification';

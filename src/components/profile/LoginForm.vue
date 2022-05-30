@@ -12,7 +12,10 @@
         </ion-list>
         <ion-button shape="round" type="submit" expand="block">Connexion</ion-button>
         <ion-item>
-            <ion-checkbox slot="start">
+            <ion-checkbox 
+                slot="start" 
+                @update:modelValue="stayLogged = $event"
+                :modelValue="stayLogged">
             </ion-checkbox>
             <ion-label>Rester connecté</ion-label>
         </ion-item>
@@ -48,10 +51,10 @@ export default {
         async loginHandler() {
             const email = this.email;
             const password = this.password;
+            const stayLogged = this.stayLogged
             if(email && password) {
                 try {
-                    console.log("loginHandler");
-                    startLoading("Loading");
+                    await startLoading("Loading");
                     const { user, session, error } = await supabase.auth.signIn({
                         email: email,
                         password: password,
@@ -60,8 +63,15 @@ export default {
                         shouldCreateUser: false
                     })
                     if (error) throw error
+                    if(stayLogged) {
+                        localStorage.setItem('stayLogged', 'true');
+                    }
+                    else {
+                        localStorage.setItem('stayLogged', 'false');
+                    }
                     notification("Connected", TypeNotification.Success);
-                } catch (error: ApiError | any) {
+                } 
+                catch (error: ApiError | any) {
                     notification(error.error_description || error.message, TypeNotification.Danger);
                 } 
                 finally {
@@ -74,7 +84,8 @@ export default {
     data () {
         return{
             email:'',   
-            password: ''         
+            password: '',
+            stayLogged: false
         }
     },
 }

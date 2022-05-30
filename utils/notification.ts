@@ -2,8 +2,8 @@ import '../src/styles/toast.css';
 import { toastController } from "@ionic/vue";
 
 export enum TypeNotification {
-  Danger,
-  Success
+  Danger = "danger",
+  Success = "success"
 }
 
 export default async function notification(message: string, typeNotification: TypeNotification) {
@@ -15,12 +15,6 @@ export default async function notification(message: string, typeNotification: Ty
         cssClass: 'toast'
       })
 
-      if(typeNotification === TypeNotification.Success) {
-        toast.color = "success";
-      }
-
-      if(typeNotification === TypeNotification.Danger) {
-        toast.color = "danger";
-      }
+    toast.color = typeNotification;
     return toast.present()
 }
