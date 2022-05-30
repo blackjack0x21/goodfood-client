@@ -4,6 +4,7 @@
             <ion-card-title>{{nomRestaurant}}</ion-card-title>
          </ion-card-header> 
          <ion-card-content>{{adresseRestaurant}}</ion-card-content> 
+         <ion-radio></ion-radio>
     </ion-card>
 </template>
 
