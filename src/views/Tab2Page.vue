@@ -69,10 +69,7 @@ export default  {
         height: 40
       }, 
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> dev
     return {
       cartSharp,
       locations,
