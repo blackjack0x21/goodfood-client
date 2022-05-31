@@ -69,7 +69,6 @@ export default  {
         height: 40
       }, 
     }
-
     return {
       cartSharp,
       locations,
