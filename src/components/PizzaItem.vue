@@ -1,11 +1,14 @@
 <template>
-    <ion-card>
+  <ion-card>
     <ion-card-header>
-        <ion-img :src="pizzaImage"></ion-img>
-        <ion-card-title>{{name}}</ion-card-title>
+      <ion-img :src="pizzaImage"></ion-img>
     </ion-card-header>
-
-    <ion-card-content>{{price}}</ion-card-content>
+    <ion-card-title>
+      {{name}}
+    </ion-card-title>
+    <ion-card-content>
+      {{price}}
+    </ion-card-content>
   </ion-card>
 </template>
 

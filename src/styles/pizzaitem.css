@@ -1,11 +1,17 @@
 ion-card-header > ion-img {
     margin-bottom: 10%;
+    height: 13em;
+    width: 15em;
 }
 
-ion-card-header > ion-card-title {
+ion-card-title {
     text-align: center;
 }
 
 ion-card-content {
     text-align: center;
+}
+
+ion-card {
+    height: 24em;
 }
