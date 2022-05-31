@@ -39,7 +39,7 @@
           <PizzaItem :pizzaImage="'https://www.pngplay.com/wp-content/uploads/2/Top-View-Pizza-Transparent-Images.png'" :name="'Poivron'" :price="'14€'"/>
         </swiper-slide>
         <swiper-slide>
-          <PizzaItem :pizzaImage="'https://www.pngplay.com/wp-content/uploads/6/Real-Dominos-Pizza-Transparent-PNG.png'" :name="'Chorizo'" :price="'10€'"/>
+          <PizzaItem :pizzaImage="'assets/images/Real-Dominos-Pizza-Transparent-PNG.png'" :name="'Chorizo'" :price="'10€'"/>
         </swiper-slide>
         <swiper-slide>
           <PizzaItem :pizzaImage="'https://www.pngplay.com/wp-content/uploads/2/Cheese-Pizza-Transparent-Background.png'" :name="'4 fromages'" :price="'12€'"/>
