@@ -5,6 +5,7 @@ import RegisterPage from '../views/RegisterPage.vue'
 import ForgotPasswordPage from '../views/ForgotPasswordPage.vue'
 import ResetPasswordPage from '../views/ResetPasswordPage.vue'
 import RgpdPage from '../views/RgpdPage.vue'
+import PizzaDetail from '../views/PizzaDetail.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -48,6 +49,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/rgpd/',
     component: RgpdPage
+  },
+  {
+    path: '/pizzadetail/',
+    component: PizzaDetail
   }
 ]
 

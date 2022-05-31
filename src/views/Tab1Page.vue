@@ -33,7 +33,9 @@
         :loop="true"
       >
         <swiper-slide>
-          <PizzaItem :pizzaImage="'https://laroma-pizza.fr/wp-content/uploads/2021/06/pizza-homepage.png'" :name="'Bacon'" :price="'12€'"/>
+          <a class="pizza-items" href="/pizzadetail/">
+            <PizzaItem :pizzaImage="'https://laroma-pizza.fr/wp-content/uploads/2021/06/pizza-homepage.png'" :name="'Bacon'" :price="'12€'"/>
+          </a>
         </swiper-slide>
         <swiper-slide>
           <PizzaItem :pizzaImage="'https://www.pngplay.com/wp-content/uploads/2/Top-View-Pizza-Transparent-Images.png'" :name="'Poivron'" :price="'14€'"/>
@@ -65,7 +67,6 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { cartSharp } from 'ionicons/icons';
 import PizzaItem from '@/components/PizzaItem.vue';
 import '../styles/index.css'
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
